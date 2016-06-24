@@ -3,12 +3,11 @@ fc.setStage = (function() {
     var $startLink = $('[data-link-start]');
     var $headingTitle = $('[data-link-title]');
     var $stage = $('[data-stage]');
-    var $hero = $('[data-hero]');
     var $tree = $('[data-tree]'); // get the first tree
-    var $hero = $('[data-hero]');
-  
+    var $player;  
+
     // Create Variables
-    var heroWidth = 0;
+    var playerWidth = 0;
     var stageWidth = 0;
     var stageHeight = 0;
     var gridWidth = 0;
@@ -16,14 +15,9 @@ fc.setStage = (function() {
     var randomX = 0;
     var randomY = 0;
     var animalsToStart = 8;
-    // random hero picked along lower side of food chain (adjust for difficulty -- start lower on chain)
-    var heroIndex;
+    // random player picked along lower side of food chain (adjust for difficulty -- start lower on chain)
+    var playerIndex;
     var htmlAnimal;
-
-    // Returns a random number between min and max
-    function getRandomArbitrary(min, max) {
-        return Math.random() * (max - min) + min;
-    }
 
     // Set Stage
     function stage() {
@@ -35,7 +29,8 @@ fc.setStage = (function() {
         $startLink.show(); // show link
         $headingTitle.show(); // show text
         $tree.removeClass('grow'); // hide trees
-        $stage.find('.animal').remove(); // remove hero and animals
+        $player.remove(); // remove player
+        $stage.find('.animal').remove(); // remove animals
     }
 
     // Setup Handlers
@@ -45,7 +40,7 @@ fc.setStage = (function() {
             $(this).hide(); // hide link
             $headingTitle.hide(); // hide text
             $tree.addClass('grow'); // show trees
-            addHero();
+            addPlayer();
         });
         $(document).keydown(function(e) {
             //reset game
@@ -55,14 +50,14 @@ fc.setStage = (function() {
         });
     }
 
-    // Calculate dimensions of 'hero', 'stage', and grid
+    // Calculate dimensions of 'player', 'stage', and grid
     function calcDims() {
-        heroWidth = $hero.width();
-        stageWidth = $stage.width() - heroWidth;
-        stageHeight = $stage.height() - heroWidth;
-        // stage divided by hero (assuming hero is square)
-        gridWidth = stageWidth / heroWidth;
-        gridHeight = stageHeight / heroWidth;
+        playerWidth = 50;
+        stageWidth = $stage.width() - playerWidth;
+        stageHeight = $stage.height() - playerWidth;
+        // stage divided by player (assuming player is square)
+        gridWidth = stageWidth / playerWidth;
+        gridHeight = stageHeight / playerWidth;
     }
 
     function genTrees() {
@@ -85,11 +80,17 @@ fc.setStage = (function() {
         }
     }
 
+    // Returns a random number between min and max
+    function getRandomIndex(min, max) {
+        return Math.random() * (max - min) + min;
+    }    
+
+    // Set random coordinates
     function randomCoords() {
-        calcDims(); // check fc.heroWidth in case browser zoom changed
-        randomX = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * heroWidth;
-        randomY = (Math.floor(Math.random() * gridHeight) + 1) * heroWidth;
-        if (randomX % (heroWidth * 2) === 0 && randomY % (heroWidth * 2) === 0) {
+        calcDims(); // check fc.playerWidth in case browser zoom changed
+        randomX = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * playerWidth;
+        randomY = (Math.floor(Math.random() * gridHeight) + 1) * playerWidth;
+        if (randomX % (playerWidth * 2) === 0 && randomY % (playerWidth * 2) === 0) {
             $.each(fc.foodChain, function() {
                 if (this.coords[0] === fc.randomX && this.coords[1] === fc.randomY) {
                     randomCoords();
@@ -100,11 +101,12 @@ fc.setStage = (function() {
         }
     }    
 
-    function addHero() {
-        heroIndex = Math.floor(getRandomArbitrary(2, animalsToStart));
-        randomCoords(); // return hero index
-        var animalHtml = '<div data-role="hero" id="sprite-' + heroIndex + '" class="sprite animal" style="left:' + randomX + 'px;top:' + randomY + 'px">' + fc.foodChain[heroIndex].code + '</div>';
+    // Add player to stage
+    function addPlayer() {
+        playerIndex = Math.floor(getRandomIndex(2, animalsToStart));
+        var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player">' + fc.foodChain[playerIndex].code + '</div>';
         $stage.append(animalHtml);
+        $player = $('[data-player]');
     }
 
     // Initialize function
