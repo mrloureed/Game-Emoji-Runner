@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+    <script src="assets/js/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/init.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="score">
+            <h2 class="audio">SCORE <span data-score>0</span></h2>
+            <h2 class="audio">LEVEL <span data-level>1</span></h2>
+        </div>
+        <div class="stage overlay">
+            <div class="clipbox overbox"></div>
+            <div class="clipbox">
+                <div class="window"></div>
+            </div>
+        </div>
+        <div data-stage class="stage">
+            <div data-hero class="sprite hero">
+                <div></div>
+            </div>
+            <div data-tree class="sprite tree"><span>&#x1F332;</span></div>
+        </div>
+        <h2 data-text-alert class="text-alert">GAME OVER</h2>
+        <h2 data-link-title class="text-alert title"><span class="emoji">&#x1F468;</span>EMOJI<br/>RUNNER</h2>
+        <h2 data-link-start class="text-alert start"><a href="#">< START ></a></h2>
+    </div>
+</body>
+
+</html>
