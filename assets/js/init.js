@@ -14,7 +14,7 @@ fc.setStage = (function() {
     var gridHeight = 0;
     var randomX = 0;
     var randomY = 0;
-    var animalsToStart = 8;
+    var level = 1;
     // random player picked along lower side of food chain (adjust for difficulty -- start lower on chain)
     var playerIndex;
     var htmlAnimal;
@@ -103,7 +103,7 @@ fc.setStage = (function() {
 
     // Add player to stage
     function addPlayer() {
-        playerIndex = Math.floor(getRandomIndex(2, animalsToStart));
+        playerIndex = Math.floor(getRandomIndex(12-level, 15-level));
         var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player">' + fc.foodChain[playerIndex].code + '</div>';
         $stage.append(animalHtml);
         $player = $('[data-player]');
