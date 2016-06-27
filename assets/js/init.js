@@ -7,22 +7,13 @@ fc.setStage = (function() {
     var $player;  
 
     // Create Variables
-    var playerWidth = 0;
+    var playerWidth = 50;
     var stageWidth = 0;
     var stageHeight = 0;
     var gridWidth = 0;
     var gridHeight = 0;
-    var randomX = 0;
-    var randomY = 0;
     var level = 1;
-    // random player picked along lower side of food chain (adjust for difficulty -- start lower on chain)
     var playerIndex;
-    var htmlAnimal;
-
-    // Set Stage
-    function stage() {
-
-    }
 
     function resetGame() {
         fc.defineSprites(); // reset data
@@ -41,7 +32,9 @@ fc.setStage = (function() {
             $headingTitle.hide(); // hide text
             $tree.addClass('grow'); // show trees
             addPlayer();
+            addAnimals();
         });
+
         $(document).keydown(function(e) {
             //reset game
             if (e.keyCode == 27) {
@@ -52,7 +45,6 @@ fc.setStage = (function() {
 
     // Calculate dimensions of 'player', 'stage', and grid
     function calcDims() {
-        playerWidth = 50;
         stageWidth = $stage.width() - playerWidth;
         stageHeight = $stage.height() - playerWidth;
         // stage divided by player (assuming player is square)
@@ -86,19 +78,38 @@ fc.setStage = (function() {
     }    
 
     // Set random coordinates
-    function randomCoords() {
+    function addAnimals() {
         calcDims(); // check fc.playerWidth in case browser zoom changed
-        randomX = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * playerWidth;
-        randomY = (Math.floor(Math.random() * gridHeight) + 1) * playerWidth;
-        if (randomX % (playerWidth * 2) === 0 && randomY % (playerWidth * 2) === 0) {
-            $.each(fc.foodChain, function() {
-                if (this.coords[0] === fc.randomX && this.coords[1] === fc.randomY) {
-                    randomCoords();
+
+        function searchMatch(i) {
+            var rCoords = new Array();
+            rCoords[0] = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * playerWidth;
+            rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * playerWidth;
+            
+            var foundMatch = false;
+            $.each(fc.foodChain, function(index, object) {
+                // check to see if x and y coordinates match coordinate in foodChain object
+                if(object.coords[0] === rCoords[0] && object.coords[1] === rCoords[1]) {
+                    foundMatch = true;
                 }
             });
-        } else {
-            randomCoords();
+
+            // we didn't find a match so proceed generating animal
+            if(foundMatch != true) {
+                fc.foodChain[i].coords[0] = rCoords[0];
+                fc.foodChain[i].coords[1] = rCoords[1];
+                var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
+                $stage.append(animalHtml); // add animal html
+                $('[data-animal="'+i+'"]').css('left',rCoords[0]+'px').css('top',rCoords[1]+'px'); // position animal
+            } else {
+                searchMatch(i); // we found a match - try again
+            }   
         }
+
+        // generate an animal for every item in foodChain object
+        $.each(fc.foodChain, function(index, object) {
+            searchMatch(index);
+        });
     }    
 
     // Add player to stage
