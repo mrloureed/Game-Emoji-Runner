@@ -79,23 +79,24 @@ fc.setStage = (function() {
 
     // Set random coordinates
     function addAnimals() {
-        calcDims(); // check fc.playerWidth in case browser zoom changed
+        calcDims(); // check playerWidth in case browser zoom changed
 
         function searchMatch(i) {
+            var foundMatch = false;
+
             var rCoords = new Array();
             rCoords[0] = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * playerWidth;
-            rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * playerWidth;
-            
-            var foundMatch = false;
-            $.each(fc.foodChain, function(index, object) {
-                // check to see if x and y coordinates match coordinate in foodChain object
-                if(object.coords[0] === rCoords[0] && object.coords[1] === rCoords[1]) {
-                    foundMatch = true;
-                }
-            });
+            rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * playerWidth; 
 
-            // we didn't find a match so proceed generating animal
-            if(foundMatch != true) {
+                $.each(fc.foodChain, function(index, object) {
+                    // check to see if x and y coordinates match coordinate in foodChain object
+                    if(object.coords[0] === rCoords[0] && object.coords[1] === rCoords[1]) {
+                        foundMatch = true;
+                    }
+                });
+
+            // we didn't find a match so proceed generating animal as long as coordinates are not over trees
+            if(foundMatch != true && rCoords[0] % (playerWidth * 2) === 0 && rCoords[1] % (playerWidth * 2) === 0) {
                 fc.foodChain[i].coords[0] = rCoords[0];
                 fc.foodChain[i].coords[1] = rCoords[1];
                 var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
