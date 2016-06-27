@@ -16,7 +16,6 @@ fc.setStage = (function() {
     var animalsToStart = 5; // number of animals to start
     var playerIndex;
 
-
     function resetGame() {
         fc.defineSprites(); // reset data
         $startLink.show(); // show link
@@ -29,6 +28,7 @@ fc.setStage = (function() {
 
     // Setup Handlers
     function setHandlers() {
+        // start game
         $startLink.click(function() {
             fc.defineSprites(); // reset data
             $(this).hide(); // hide link
@@ -41,11 +41,22 @@ fc.setStage = (function() {
             fc.move.play();
         });
 
+        // escape key to reset game
         $(document).keydown(function(e) {
-            //reset game
             if (e.keyCode == 27) {
                 resetGame();
             }
+        });
+
+        // pause game on blur
+        window.addEventListener('blur', function() {
+           fc.playerMoving = 0;
+        });
+
+        // start game on focus
+        window.addEventListener('focus', function() {
+           fc.playerMoving = 1;
+           fc.move.play();
         });
     }
 
