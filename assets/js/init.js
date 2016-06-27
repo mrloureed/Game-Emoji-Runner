@@ -9,7 +9,7 @@ fc.setStage = (function() {
     // Create Variables
     fc.playerWidth = 50;
     fc.stageWidth = 0;
-    var stageHeight = 0;
+    fc.stageHeight = 0;
     var gridWidth = 0;
     var gridHeight = 0;
     var level = 1;
@@ -49,10 +49,10 @@ fc.setStage = (function() {
     // Calculate dimensions of 'player', 'stage', and grid
     function calcDims() {
         fc.stageWidth = $stage.width() - fc.playerWidth;
-        stageHeight = $stage.height() - fc.playerWidth;
+        fc.stageHeight = $stage.height() - fc.playerWidth;
         // stage divided by player (assuming player is square)
         gridWidth = fc.stageWidth / fc.playerWidth;
-        gridHeight = stageHeight / fc.playerWidth;
+        gridHeight = fc.stageHeight / fc.playerWidth;
     }
 
     function genTrees() {
@@ -60,7 +60,7 @@ fc.setStage = (function() {
         var x = 50;
         var y = -50;
         var treeCoords = [];
-        while (y < stageHeight - 100) {
+        while (y < fc.stageHeight - 100) {
             y = y + 100;
             while (x < fc.stageWidth - 100) {
                 x = x + 100;
