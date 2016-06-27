@@ -146,9 +146,7 @@ fc.move = (function() {
             fc.$player.removeClass('flip');
         }
 
-        fc.$player.find('div').css({
-            WebkitTransform: 'rotate(' + deg + 'deg)'
-        });
+        $('.player div').css('transform','rotate('+deg+'deg)');
     }
 
     function setDirection(d) {

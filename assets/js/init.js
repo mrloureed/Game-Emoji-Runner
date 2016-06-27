@@ -120,7 +120,7 @@ fc.setStage = (function() {
     // Add player to stage
     function addPlayer() {
         playerIndex = Math.floor(getRandomIndex(2, 4)); // player starts low on chain
-        var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player">' + fc.foodChain[playerIndex].code + '</div>';
+        var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player"><div>' + fc.foodChain[playerIndex].code + '</div></div>';
         $stage.append(animalHtml);
         fc.$player = $('[data-player]');
     }
