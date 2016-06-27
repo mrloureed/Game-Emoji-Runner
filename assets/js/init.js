@@ -4,11 +4,11 @@ fc.setStage = (function() {
     var $headingTitle = $('[data-link-title]'); // game title
     var $stage = $('[data-stage]'); // get stage div
     var $tree = $('[data-tree]'); // get the first tree
-    var $player;  
+    fc.$player;  
 
     // Create Variables
-    var playerWidth = 50;
-    var stageWidth = 0;
+    fc.playerWidth = 50;
+    fc.stageWidth = 0;
     var stageHeight = 0;
     var gridWidth = 0;
     var gridHeight = 0;
@@ -22,7 +22,7 @@ fc.setStage = (function() {
         $startLink.show(); // show link
         $headingTitle.show(); // show text
         $tree.removeClass('grow'); // hide trees
-        $player.remove(); // remove player
+        fc.$player.remove(); // remove player
         $stage.find('.animal').remove(); // remove animals
     }
 
@@ -35,6 +35,7 @@ fc.setStage = (function() {
             $tree.addClass('grow'); // show trees
             addPlayer();
             addAnimals();
+            fc.move.play();
         });
 
         $(document).keydown(function(e) {
@@ -47,11 +48,11 @@ fc.setStage = (function() {
 
     // Calculate dimensions of 'player', 'stage', and grid
     function calcDims() {
-        stageWidth = $stage.width() - playerWidth;
-        stageHeight = $stage.height() - playerWidth;
+        fc.stageWidth = $stage.width() - fc.playerWidth;
+        stageHeight = $stage.height() - fc.playerWidth;
         // stage divided by player (assuming player is square)
-        gridWidth = stageWidth / playerWidth;
-        gridHeight = stageHeight / playerWidth;
+        gridWidth = fc.stageWidth / fc.playerWidth;
+        gridHeight = stageHeight / fc.playerWidth;
     }
 
     function genTrees() {
@@ -61,7 +62,7 @@ fc.setStage = (function() {
         var treeCoords = [];
         while (y < stageHeight - 100) {
             y = y + 100;
-            while (x < stageWidth - 100) {
+            while (x < fc.stageWidth - 100) {
                 x = x + 100;
                 var $c = $tree.clone(true);
                 $stage.append($c);
@@ -87,8 +88,8 @@ fc.setStage = (function() {
             var foundMatch = false;
 
             var rCoords = new Array();
-            rCoords[0] = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * playerWidth;
-            rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * playerWidth; 
+            rCoords[0] = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * fc.playerWidth;
+            rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * fc.playerWidth; 
 
                 $.each(fc.foodChain, function(index, object) {
                     // check to see if x and y coordinates match coordinate in foodChain object
@@ -98,7 +99,7 @@ fc.setStage = (function() {
                 });
 
             // we didn't find a match so proceed generating animal as long as coordinates are not over trees
-            if(foundMatch != true && rCoords[0] % (playerWidth * 2) === 0 && rCoords[1] % (playerWidth * 2) === 0) {
+            if(foundMatch != true && rCoords[0] % (fc.playerWidth * 2) === 0 && rCoords[1] % (fc.playerWidth * 2) === 0) {
                 fc.foodChain[i].coords[0] = rCoords[0];
                 fc.foodChain[i].coords[1] = rCoords[1];
                 var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
@@ -121,7 +122,7 @@ fc.setStage = (function() {
         playerIndex = Math.floor(getRandomIndex(2, 4)); // player starts low on chain
         var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player">' + fc.foodChain[playerIndex].code + '</div>';
         $stage.append(animalHtml);
-        $player = $('[data-player]');
+        fc.$player = $('[data-player]');
     }
 
     // Initialize function

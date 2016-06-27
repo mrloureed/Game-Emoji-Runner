@@ -97,7 +97,7 @@ h2 {
 }
 
 .sprite.no-transition {
-    -webkit-transition-duration: 0 !important;
+    transition: none !important;
 }
 
 .sprite > div {
