@@ -161,6 +161,12 @@ fc.move = (function() {
         });
     }
 
+    function setVariables() {
+        fc.playerMoving = 0;
+        fc.playerX = 0;
+        fc.playerY = 0;
+    }
+
     function bindDom() {
         $(document).keydown(function(e) {
             //event handlers
@@ -183,12 +189,18 @@ fc.move = (function() {
         });
     }
 
+    function init() {
+        setVariables();
+        bindDom();
+    }
+
     // bind dom
-    $(bindDom);
+    $(init);
 
     // Reveal public pointers to
     // private functions and properties
     return {
+        setVars: setVariables,
         play: startShow
     };
 

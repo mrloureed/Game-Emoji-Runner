@@ -24,9 +24,7 @@ fc.setStage = (function() {
         $tree.removeClass('grow'); // hide trees
         fc.$player.remove(); // remove player
         $stage.find('.animal').remove(); // remove animals
-        fc.playerMoving = 0;
-        fc.playerX = 0;
-        fc.playerY = 0;
+        fc.move.setVars(); // reset move vars
     }
 
     // Setup Handlers
