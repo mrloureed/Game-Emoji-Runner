@@ -1,9 +1,9 @@
 fc.move = (function() {
 
-    var playerX = 0;
-    var playerY = 0;
+    fc.playerX = 0;
+    fc.playerY = 0;
     var levelSpeed = 300;
-    var playerMoving = 1;
+    fc.playerMoving = 1;
     var directionHeading = 'right';
 
     // x, y, angle (used for movement)
@@ -18,18 +18,18 @@ fc.move = (function() {
     var playerDirX = 1;
     var playerDirY = 0;
     var playerRotation = 90;
-    var directionRequested = 'right';
-    var playerFlip;
+    fc.directionRequested = 'right';
+    playerFlip = direction.right[3];
 
     function startShow() {
-        if (playerMoving !== 0) {
-            playerMoving = setTimeout(playerMove, levelSpeed); 
-            checkTurn(directionRequested);
+        if (fc.playerMoving !== 0) {
+            fc.playerMoving = setTimeout(playerMove, levelSpeed); 
+            checkTurn(fc.directionRequested);
         }
     }
 
     function playerMove() {
-        if (playerMoving !== 0) {
+        if (fc.playerMoving !== 0) {
             startShow();
         } else {
             return;
@@ -38,99 +38,99 @@ fc.move = (function() {
         // track current location
         // set new location
         function checkX() {
-            var check = playerX + playerDirX * fc.playerWidth;
+            var check = fc.playerX + playerDirX * fc.playerWidth;
             // if on a row with trees check for trees, otherwise move
-            if ((check % 50 == 0 && check % 100 == 0) || (playerY / 50) % 2 === 0) {
-                playerX = check;
+            if ((check % 50 == 0 && check % 100 == 0) || (fc.playerY / 50) % 2 === 0) {
+                fc.playerX = check;
             }
         }
 
         function checkY() {
-            var check = playerY + playerDirY * fc.playerWidth;
+            var check = fc.playerY + playerDirY * fc.playerWidth;
             // if on a row with trees check for trees, otherwise move
-            if ((check % 50 == 0 && check % 100 == 0) || (playerX / 50) % 2 === 0) {
-                playerY = check;
+            if ((check % 50 == 0 && check % 100 == 0) || (fc.playerX / 50) % 2 === 0) {
+                fc.playerY = check;
             }
         }
 
         if (directionHeading === 'left') {
-            if (playerX > -fc.playerWidth) {
+            if (fc.playerX > -fc.playerWidth) {
                 fc.$player.removeClass('no-transition');
                 checkX();
             } else {
                 fc.$player.addClass('no-transition');
-                playerX = fc.stageWidth + fc.playerWidth;
+                fc.playerX = fc.stageWidth + fc.playerWidth;
             }
         }
 
         if (directionHeading === 'right') {
-            if (playerX < fc.stageWidth + fc.playerWidth) {
+            if (fc.playerX < fc.stageWidth + fc.playerWidth) {
                 fc.$player.removeClass('no-transition');
                 checkX();
             } else {
                 fc.$player.addClass('no-transition');
-                playerX = -fc.playerWidth;
+                fc.playerX = -fc.playerWidth;
             }
         }
 
         if (directionHeading === 'down') {
-            if (playerY < fc.stageHeight + fc.playerWidth) {
+            if (fc.playerY < fc.stageHeight + fc.playerWidth) {
                 fc.$player.removeClass('no-transition');
                 checkY();
             } else {
                 fc.$player.addClass('no-transition');
-                playerY = -fc.playerWidth;
+                fc.playerY = -fc.playerWidth;
             }
         }
 
         if (directionHeading === 'up') {
-            if (playerY > -fc.playerWidth) {
+            if (fc.playerY > -fc.playerWidth) {
                 fc.$player.removeClass('no-transition');
                 checkY();
             } else {
                 fc.$player.addClass('no-transition');
-                playerY = fc.stageHeight + fc.playerWidth;
+                fc.playerY = fc.stageHeight + fc.playerWidth;
             }
         }
 
         // adjust if moving
         if (playerDirX != 0) {
-            fc.$player.css('left', playerX);
+            fc.$player.css('left', fc.playerX);
         }
         if (playerDirY != 0) {
-            fc.$player.css('top', playerY);
+            fc.$player.css('top', fc.playerY);
         }    
     }
 
     function checkTurn() {
-        if (directionRequested === 'left') {
+        if (fc.directionRequested === 'left') {
             playerRotation = direction.left[2];
             playerFlip = direction.left[3];
-            if (playerY % 100 === 0) {
+            if (fc.playerY % 100 === 0) {
                 directionHeading = 'left';
             }
         }
 
-        if (directionRequested === 'right') {
+        if (fc.directionRequested === 'right') {
             playerRotation = direction.right[2];
             playerFlip = direction.right[3];
-            if (playerY % 100 === 0) {
+            if (fc.playerY % 100 === 0) {
                 directionHeading = 'right';
             }
         }
 
-        if (directionRequested === 'up') {
+        if (fc.directionRequested === 'up') {
             playerRotation = direction.up[2];
             playerFlip = direction.up[3];
-            if ((playerY - 50) % 50 === 0 && playerX % 100 === 0) {
+            if ((fc.playerY - 50) % 50 === 0 && fc.playerX % 100 === 0) {
                 directionHeading = 'up';
             }
         }
 
-        if (directionRequested === 'down') {
+        if (fc.directionRequested === 'down') {
             playerRotation = direction.down[2];
             playerFlip = direction.down[3];
-            if ((playerY + 50) % 50 === 0 && playerX % 100 === 0) {
+            if ((fc.playerY + 50) % 50 === 0 && fc.playerX % 100 === 0) {
                 directionHeading = 'down';
             }
         }
@@ -166,19 +166,19 @@ fc.move = (function() {
             //event handlers
             //left
             if (e.keyCode == 37) {
-                directionRequested = 'left';
+                fc.directionRequested = 'left';
             }
             //right
             if (e.keyCode == 39) {
-                directionRequested = 'right';
+                fc.directionRequested = 'right';
             }
             //up
             if (e.keyCode == 38) {
-                directionRequested = 'up';
+                fc.directionRequested = 'up';
             }
             //down
             if (e.keyCode == 40) {
-                directionRequested = 'down';
+                fc.directionRequested = 'down';
             }
         });
     }

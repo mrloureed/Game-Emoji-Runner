@@ -24,6 +24,9 @@ fc.setStage = (function() {
         $tree.removeClass('grow'); // hide trees
         fc.$player.remove(); // remove player
         $stage.find('.animal').remove(); // remove animals
+        fc.playerMoving = 0;
+        fc.playerX = 0;
+        fc.playerY = 0;
     }
 
     // Setup Handlers
@@ -35,6 +38,8 @@ fc.setStage = (function() {
             $tree.addClass('grow'); // show trees
             addPlayer();
             addAnimals();
+            fc.playerMoving = 1;
+            fc.directionRequested = 'right';
             fc.move.play();
         });
 
@@ -91,12 +96,12 @@ fc.setStage = (function() {
             rCoords[0] = (Math.floor(Math.random() * (gridWidth - 1) + 1)) * fc.playerWidth;
             rCoords[1] = (Math.floor(Math.random() * (gridHeight - 1) + 1)) * fc.playerWidth; 
 
-                $.each(fc.foodChain, function(index, object) {
-                    // check to see if x and y coordinates match coordinate in foodChain object
-                    if(object.coords[0] === rCoords[0] && object.coords[1] === rCoords[1]) {
-                        foundMatch = true;
-                    }
-                });
+            $.each(fc.foodChain, function(index, object) {
+                // check to see if x and y coordinates match coordinate in foodChain object
+                if(object.coords[0] === rCoords[0] && object.coords[1] === rCoords[1]) {
+                    foundMatch = true;
+                }
+            });
 
             // we didn't find a match so proceed generating animal as long as coordinates are not over trees
             if(foundMatch != true && rCoords[0] % (fc.playerWidth * 2) === 0 && rCoords[1] % (fc.playerWidth * 2) === 0) {
