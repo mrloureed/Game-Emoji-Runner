@@ -21,13 +21,10 @@ fc.move = (function() {
     var directionRequested = 'right';
     var playerFlip;
 
-    function play() {
-        playerMoving = setTimeout(playerMove, levelSpeed);
-    }
-
     function startShow() {
         if (playerMoving !== 0) {
             playerMoving = setTimeout(playerMove, levelSpeed); 
+            checkTurn(directionRequested);
         }
     }
 
@@ -185,8 +182,6 @@ fc.move = (function() {
             if (e.keyCode == 40) {
                 directionRequested = 'down';
             }
-
-            checkTurn(directionRequested);
         });
     }
 
@@ -196,7 +191,7 @@ fc.move = (function() {
     // Reveal public pointers to
     // private functions and properties
     return {
-        play: play
+        play: startShow
     };
 
 })();
