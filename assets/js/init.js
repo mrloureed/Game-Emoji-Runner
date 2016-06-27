@@ -1,8 +1,8 @@
 // Set the 'stage'
 fc.setStage = (function() {
-    var $startLink = $('[data-link-start]');
-    var $headingTitle = $('[data-link-title]');
-    var $stage = $('[data-stage]');
+    var $startLink = $('[data-link-start]'); // start link
+    var $headingTitle = $('[data-link-title]'); // game title
+    var $stage = $('[data-stage]'); // get stage div
     var $tree = $('[data-tree]'); // get the first tree
     var $player;  
 
@@ -13,7 +13,9 @@ fc.setStage = (function() {
     var gridWidth = 0;
     var gridHeight = 0;
     var level = 1;
+    var animalsToStart = 5; // number of animals to start
     var playerIndex;
+
 
     function resetGame() {
         fc.defineSprites(); // reset data
@@ -110,12 +112,13 @@ fc.setStage = (function() {
         // generate an animal for every item in foodChain object
         $.each(fc.foodChain, function(index, object) {
             searchMatch(index);
+            return index < animalsToStart-1;
         });
     }    
 
     // Add player to stage
     function addPlayer() {
-        playerIndex = Math.floor(getRandomIndex(12-level, 15-level));
+        playerIndex = Math.floor(getRandomIndex(2, 4)); // player starts low on chain
         var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player">' + fc.foodChain[playerIndex].code + '</div>';
         $stage.append(animalHtml);
         $player = $('[data-player]');
