@@ -25,6 +25,7 @@ fc.move = (function() {
         if (fc.playerMoving !== 0) {
             fc.playerMoving = setTimeout(playerMove, levelSpeed); 
             checkTurn(fc.directionRequested);
+            fc.collisions.check();
         }
     }
 

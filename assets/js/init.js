@@ -2,7 +2,7 @@
 fc.setStage = (function() {
     var $startLink = $('[data-link-start]'); // start link
     var $headingTitle = $('[data-link-title]'); // game title
-    var $stage = $('[data-stage]'); // get stage div
+    fc.$stage = $('[data-stage]'); // get stage div
     var $tree = $('[data-tree]'); // get the first tree
     fc.$player;  
 
@@ -14,7 +14,7 @@ fc.setStage = (function() {
     var gridHeight = 0;
     var level = 1;
     var animalsToStart = 5; // number of animals to start
-    var playerIndex;
+    fc.playerIndex;
 
     function resetGame() {
         fc.defineSprites(); // reset data
@@ -22,7 +22,7 @@ fc.setStage = (function() {
         $headingTitle.show(); // show text
         $tree.removeClass('grow'); // hide trees
         fc.$player.remove(); // remove player
-        $stage.find('.animal').remove(); // remove animals
+        fc.$stage.find('.animal').remove(); // remove animals
         fc.move.setVars(); // reset move vars
     }
 
@@ -62,8 +62,8 @@ fc.setStage = (function() {
 
     // Calculate dimensions of 'player', 'stage', and grid
     function calcDims() {
-        fc.stageWidth = $stage.width() - fc.playerWidth;
-        fc.stageHeight = $stage.height() - fc.playerWidth;
+        fc.stageWidth = fc.$stage.width() - fc.playerWidth;
+        fc.stageHeight = fc.$stage.height() - fc.playerWidth;
         // stage divided by player (assuming player is square)
         gridWidth = fc.stageWidth / fc.playerWidth;
         gridHeight = fc.stageHeight / fc.playerWidth;
@@ -79,7 +79,7 @@ fc.setStage = (function() {
             while (x < fc.stageWidth - 100) {
                 x = x + 100;
                 var $c = $tree.clone(true);
-                $stage.append($c);
+                fc.$stage.append($c);
                 $c.css('left', x + 'px');
                 $c.css('top', y + 'px');
                 i++;
@@ -117,7 +117,7 @@ fc.setStage = (function() {
                 fc.foodChain[i].coords[0] = rCoords[0];
                 fc.foodChain[i].coords[1] = rCoords[1];
                 var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
-                $stage.append(animalHtml); // add animal html
+                fc.$stage.append(animalHtml); // add animal html
                 $('[data-animal="'+i+'"]').css('left',rCoords[0]+'px').css('top',rCoords[1]+'px'); // position animal
             } else {
                 searchMatch(i); // we found a match - try again
@@ -133,9 +133,9 @@ fc.setStage = (function() {
 
     // Add player to stage
     function addPlayer() {
-        playerIndex = Math.floor(getRandomIndex(2, 4)); // player starts low on chain
-        var animalHtml = '<div data-player id="sprite-' + playerIndex + '" class="sprite player"><div>' + fc.foodChain[playerIndex].code + '</div></div>';
-        $stage.append(animalHtml);
+        fc.playerIndex = Math.floor(getRandomIndex(2, 4)); // player starts low on chain
+        var animalHtml = '<div data-player class="sprite player"><div>' + fc.foodChain[fc.playerIndex].code + '</div></div>';
+        fc.$stage.append(animalHtml);
         fc.$player = $('[data-player]');
     }
 
