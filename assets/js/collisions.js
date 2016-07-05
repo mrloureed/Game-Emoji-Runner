@@ -1,11 +1,14 @@
 fc.collisions = (function() {
-	function createSkull(i) {
+	function createGhost($o, i) {
         // ascend ghost
-        var sCoords = $('#sprite-' + i).offset();
+        var sCoords = $o.offset();
         var sx = sCoords.top - 100;
-        $('#sprite-' + i).addClass('sprite ghost').css('top', sx + 'px');
+        $o.addClass('sprite ghost').css('top', sx + 'px');
+    }
+
+    function createSkull($o, i) {
         // make skull
-        $('#sprite-' + i).clone().attr('id', 'heaven-' + i).appendTo(fc.$stage);
+        $o.clone().attr('id', 'heaven-' + i).appendTo(fc.$stage);
         $('#heaven-' + i).html('&#x1F480;').addClass('skull');
     }
 
@@ -33,8 +36,14 @@ fc.collisions = (function() {
                     fc.playerIndex++;
         			updatePlayer();
                     // create skull
-                    createSkull(index);
+                    var $obj = $('#sprite-' + index);
+                    createGhost($obj, index);
+                    createSkull($obj, index);
                 } else if (fc.playerIndex < index) {
+                    // create ghost
+                    var $obj = fc.$player.clone().appendTo(fc.$stage);
+                    createGhost($obj, index);
+                    // update player
                     fc.playerIndex--;
                     updatePlayer();
                 } else {
