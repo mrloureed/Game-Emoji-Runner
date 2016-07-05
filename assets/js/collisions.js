@@ -37,8 +37,8 @@ fc.collisions = (function() {
         			updatePlayer();
                     // create skull
                     var $obj = $('#sprite-' + index);
-                    createGhost($obj, index);
                     createSkull($obj, index);
+                    createGhost($obj, index);
                 } else if (fc.playerIndex < index) {
                     // create ghost
                     var $obj = fc.$player.clone().appendTo(fc.$stage);
