@@ -1,11 +1,12 @@
 fc.collisions = (function() {
 	function createSkull(i) {
+        // ascend ghost
         var sCoords = $('#sprite-' + i).offset();
         var sx = sCoords.top - 100;
+        $('#sprite-' + i).addClass('sprite ghost').css('top', sx + 'px');
+        // make skull
         $('#sprite-' + i).clone().attr('id', 'heaven-' + i).appendTo(fc.$stage);
         $('#heaven-' + i).html('&#x1F480;').addClass('skull');
-        // ascend ghost
-        $('#sprite-' + i).addClass('sprite ghost').css('top', sx + 'px');
     }
 
     function updatePlayer() {
@@ -36,6 +37,9 @@ fc.collisions = (function() {
                 } else if (fc.playerIndex < index) {
                     fc.playerIndex--;
                     updatePlayer();
+                    // create skull
+                    $('#sprite-' + i).clone().attr('id', 'heaven-' + i).appendTo(fc.$stage);
+                    $('#heaven-' + i).html('&#x1F480;').addClass('skull');
                 } else {
                     //tie
                     $('#sprite-' + index).attr('id', 'heart-' + index).appendTo(fc.$stage);
