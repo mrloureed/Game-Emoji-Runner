@@ -2,7 +2,7 @@ fc.move = (function() {
 
     fc.playerX = 0;
     fc.playerY = 0;
-    var levelSpeed = 300;
+    levelSpeed = 300;
     fc.playerMoving = 1;
     var directionHeading = 'right';
 
@@ -17,12 +17,12 @@ fc.move = (function() {
     //initial direction is right [1,0]
     var playerDirX = 1;
     var playerDirY = 0;
-    var playerRotation = 90;
+    fc.playerRotation = 90;
     fc.directionRequested = 'right';
-    playerFlip = direction.right[3];
+    fc.playerFlip = direction.right[3];
 
     function startShow() {
-        if (fc.playerMoving !== 0) {
+        if (fc.playerMoving !== 0 && fc.$player !== undefined) {
             fc.playerMoving = setTimeout(playerMove, levelSpeed); 
             checkTurn(fc.directionRequested);
             fc.collisions.check();
@@ -105,42 +105,42 @@ fc.move = (function() {
 
     function checkTurn() {
         if (fc.directionRequested === 'left') {
-            playerRotation = direction.left[2];
-            playerFlip = direction.left[3];
+            fc.playerRotation = direction.left[2];
+            fc.playerFlip = direction.left[3];
             if (fc.playerY % 100 === 0) {
                 directionHeading = 'left';
             }
         }
 
         if (fc.directionRequested === 'right') {
-            playerRotation = direction.right[2];
-            playerFlip = direction.right[3];
+            fc.playerRotation = direction.right[2];
+            fc.playerFlip = direction.right[3];
             if (fc.playerY % 100 === 0) {
                 directionHeading = 'right';
             }
         }
 
         if (fc.directionRequested === 'up') {
-            playerRotation = direction.up[2];
-            playerFlip = direction.up[3];
+            fc.playerRotation = direction.up[2];
+            fc.playerFlip = direction.up[3];
             if ((fc.playerY - 50) % 50 === 0 && fc.playerX % 100 === 0) {
                 directionHeading = 'up';
             }
         }
 
         if (fc.directionRequested === 'down') {
-            playerRotation = direction.down[2];
-            playerFlip = direction.down[3];
+            fc.playerRotation = direction.down[2];
+            fc.playerFlip = direction.down[3];
             if ((fc.playerY + 50) % 50 === 0 && fc.playerX % 100 === 0) {
                 directionHeading = 'down';
             }
         }
 
         setDirection(directionHeading);
-        rotateHero(playerRotation, playerFlip);
+        rotatePlayer(fc.playerRotation, fc.playerFlip);
     }
 
-    function rotateHero(deg, flip) {
+    function rotatePlayer(deg, flip) {
         if (flip === true) {
             fc.$player.addClass('flip');
         } else {
@@ -202,7 +202,8 @@ fc.move = (function() {
     // private functions and properties
     return {
         setVars: setVariables,
-        play: startShow
+        play: startShow,
+        rotatePlayer: rotatePlayer
     };
 
 })();
