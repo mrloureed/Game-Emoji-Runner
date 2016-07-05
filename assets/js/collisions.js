@@ -37,9 +37,6 @@ fc.collisions = (function() {
                 } else if (fc.playerIndex < index) {
                     fc.playerIndex--;
                     updatePlayer();
-                    // create skull
-                    $('#sprite-' + i).clone().attr('id', 'heaven-' + i).appendTo(fc.$stage);
-                    $('#heaven-' + i).html('&#x1F480;').addClass('skull');
                 } else {
                     //tie
                     $('#sprite-' + index).attr('id', 'heart-' + index).appendTo(fc.$stage);
