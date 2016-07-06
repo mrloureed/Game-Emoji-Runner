@@ -17,9 +17,16 @@ fc.collisions = (function() {
         fc.move.rotatePlayer(fc.playerRotation, fc.playerFlip);
     }
 
+    function resetPlayer() {
+        fc.playerX = -100;
+        fc.playerY = 0;
+        fc.$player.css('top',0).css('left',-100);
+        fc.directionRequested = 'right';
+        fc.playerMoving = 1;
+    }
+
     function checkCollisions() {
     	$.each(fc.foodChain, function(index, object) {
-            var skulls = 0;
             // Check ghost status
             if ($('#sprite-' + index).hasClass('ghost')) {
                 hasGhost = true;
@@ -40,12 +47,15 @@ fc.collisions = (function() {
                     createSkull($obj, index);
                     createGhost($obj, index);
                 } else if (fc.playerIndex < index) {
+                    fc.playerMoving = 0;
                     // create ghost
                     var $obj = fc.$player.clone().appendTo(fc.$stage);
                     createGhost($obj, index);
-                    // update player
+                    // devolve
                     fc.playerIndex--;
                     updatePlayer();
+                    // move to starting position
+                    setTimeout(resetPlayer, 10);
                 } else {
                     //tie
                     $('#sprite-' + index).attr('id', 'heart-' + index).appendTo(fc.$stage);
