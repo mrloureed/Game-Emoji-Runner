@@ -50,9 +50,9 @@ fc.collisions = (function() {
 
             // check for collision between player and emojis
             // if first coordinate is 0 emoji is out of play
-            if (this.coords[0] !== 0 && this.coords[0] === fc.playerX && this.coords[1] === fc.playerY) {
+            if (this.coords[0] !== 0 && this.coords[0] === fc.playerX && this.coords[1] === fc.playerY && hasGhost === false) {
             	// is collision a win ?
-                if (fc.playerIndex > index && hasGhost === false) {
+                if (fc.playerIndex > index) {
                     //evolve
                     fc.playerIndex++;
         			updatePlayer();
