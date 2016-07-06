@@ -23,6 +23,20 @@ fc.collisions = (function() {
         fc.$player.css('top',0).css('left',-100);
         fc.directionRequested = 'right';
         fc.playerMoving = 1;
+        checkAlive();
+    }
+
+    function checkAlive() {
+        var stillAlive = false;
+        $.each(fc.foodChain, function(index, object) {
+            if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
+                stillAlive = true;
+            }
+        });
+        if (stillAlive === false) {
+            console.log('game over');
+            fc.playerMoving = 0;
+        }
     }
 
     function checkCollisions() {
@@ -56,6 +70,7 @@ fc.collisions = (function() {
                     updatePlayer();
                     // move to starting position
                     setTimeout(resetPlayer, 10);
+                    fc.foodChain[index].onBoard = false;
                 } else {
                     //tie
                     $('#sprite-' + index).attr('id', 'heart-' + index).appendTo(fc.$stage);

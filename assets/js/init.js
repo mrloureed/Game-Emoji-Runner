@@ -119,6 +119,7 @@ fc.setStage = (function() {
                 var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
                 fc.$stage.append(animalHtml); // add animal html
                 $('[data-animal="'+i+'"]').css('left',rCoords[0]+'px').css('top',rCoords[1]+'px'); // position animal
+                fc.foodChain[i].onBoard = true;
             } else {
                 searchMatch(i); // we found a match - try again
             }   
