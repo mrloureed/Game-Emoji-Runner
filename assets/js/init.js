@@ -48,16 +48,16 @@ fc.setStage = (function() {
             }
         });
 
-        // pause game on blur
+        /* pause game on blur
         window.addEventListener('blur', function() {
            fc.playerMoving = 0;
-        });
+        });*/
 
-        // start game on focus
+        /* start game on focus
         window.addEventListener('focus', function() {
            fc.playerMoving = 1;
            fc.move.play();
-        });
+        }); */
     }
 
     // Calculate dimensions of 'player', 'stage', and grid
