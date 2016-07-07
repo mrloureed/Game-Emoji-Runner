@@ -30,6 +30,7 @@ fc.collisions = (function() {
         var stillAlive = false;
         $.each(fc.foodChain, function(index, object) {
             if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
+                console.log('still alive',fc.playerIndex,index);
                 stillAlive = true;
             }
         });
@@ -39,10 +40,23 @@ fc.collisions = (function() {
         }
     }
 
+    function checkLevel() {
+        var nextLevel = true;
+        $.each(fc.foodChain, function(index, object) {
+            if (fc.foodChain[index].onBoard === true && index >= fc.playerIndex) {
+                nextLevel = false;
+            }
+        });
+        if (nextLevel === true) {
+            console.log('next level');
+            fc.playerMoving = 0;
+        }
+    }
+
     function checkCollisions() {
     	$.each(fc.foodChain, function(index, object) {
             // Check ghost status
-            if ($('#sprite-' + index).hasClass('ghost')) {
+            if ($('#sprite-' + index).hasClass('ghost') || $('#sprite-' + index).hasClass('heart')) {
                 hasGhost = true;
             } else {
                 hasGhost = false;
@@ -60,6 +74,7 @@ fc.collisions = (function() {
                     var $obj = $('#sprite-' + index);
                     createSkull($obj, index);
                     createGhost($obj, index);
+                    checkLevel();
                 } else if (fc.playerIndex < index) {
                     fc.playerMoving = 0;
                     // create ghost
