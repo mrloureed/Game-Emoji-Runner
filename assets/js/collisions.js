@@ -28,9 +28,11 @@ fc.collisions = (function() {
     function checkAlive() {
         var stillAlive = false;
         $.each(fc.foodChain, function(index, object) {
-            if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
-                console.log('still alive',fc.playerIndex,index);
-                stillAlive = true;
+            if(!$('#sprite-' + index).hasClass('ghost') && !$('#sprite-' + index).hasClass('heart')) {
+                if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
+                    console.log('still alive',fc.playerIndex,index);
+                    stillAlive = true;
+                }
             }
         });
         if (stillAlive === false) {
@@ -49,7 +51,7 @@ fc.collisions = (function() {
         if (nextLevel === true) {
             console.log('next level');
             fc.playerMoving = 0;
-            fc.levelSpeed += 100;
+            fc.levelSpeed += 500;
             levelUp();
             fc.animalsToStart++;
             fc.playerIndex = 2; // temporarily hard coded
