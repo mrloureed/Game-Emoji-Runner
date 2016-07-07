@@ -24,7 +24,7 @@ fc.setStage = (function() {
             $(this).hide(); // hide link
             fc.$headingTitle.hide(); // hide text
             fc.$tree.addClass('grow'); // show trees
-            fc.addEmojis.addPlayer();
+            fc.addEmojis.addPlayer(2,4);
             fc.addEmojis.addAnimals();
             fc.playerMoving = 1;
             fc.directionRequested = 'right';

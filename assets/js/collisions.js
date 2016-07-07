@@ -51,6 +51,10 @@ fc.collisions = (function() {
             fc.playerMoving = 0;
             fc.levelSpeed += 100;
             levelUp();
+            fc.animalsToStart++;
+            fc.playerIndex = 2; // temporarily hard coded
+            updatePlayer();
+            fc.addEmojis.addAnimals();
         }
     }
 
