@@ -149,6 +149,7 @@ fc.setStage = (function() {
     }
 
     init();
+
 });
 
 // Start

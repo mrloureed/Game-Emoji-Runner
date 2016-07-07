@@ -23,7 +23,6 @@ fc.collisions = (function() {
         fc.$player.css('top',0).css('left',-100);
         fc.directionRequested = 'right';
         fc.playerMoving = 1;
-        checkAlive();
     }
 
     function checkAlive() {
@@ -50,7 +49,16 @@ fc.collisions = (function() {
         if (nextLevel === true) {
             console.log('next level');
             fc.playerMoving = 0;
+            fc.levelSpeed += 100;
+            levelUp();
         }
+    }
+
+    function levelUp() {
+        fc.defineSprites(); // reset data
+        fc.$stage.find('.animal').remove(); // remove animals
+        fc.move.setVars(); // reset move vars
+        setTimeout(resetPlayer, 10);
     }
 
     function checkCollisions() {
@@ -85,6 +93,7 @@ fc.collisions = (function() {
                     updatePlayer();
                     // move to starting position
                     setTimeout(resetPlayer, 10);
+                    setTimeout(checkAlive, 10);
                     fc.foodChain[index].onBoard = false;
                 } else {
                     //tie
