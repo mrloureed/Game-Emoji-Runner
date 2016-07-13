@@ -2,7 +2,7 @@ fc.move = (function() {
 
     fc.playerX = 0;
     fc.playerY = 0;
-    levelSpeed = 300;
+    fc.levelSpeed = 300;
     fc.playerMoving = 1;
     var directionHeading = 'right';
 
@@ -23,7 +23,7 @@ fc.move = (function() {
 
     function startShow() {
         if (fc.playerMoving !== 0 && fc.$player !== undefined) {
-            fc.playerMoving = setTimeout(playerMove, levelSpeed); 
+            fc.playerMoving = setTimeout(playerMove, fc.levelSpeed); 
             checkTurn(fc.directionRequested);
             fc.collisions.check();
         }

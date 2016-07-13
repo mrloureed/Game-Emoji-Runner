@@ -51,7 +51,8 @@ fc.collisions = (function() {
         if (nextLevel === true) {
             console.log('next level');
             fc.playerMoving = 0;
-            fc.levelSpeed += 500;
+            fc.levelSpeed -= 20;
+            $('.sprite').css('-webkit-transition-duration', '.'+fc.levelSpeed/100+'s');
             levelUp();
             fc.animalsToStart++;
             fc.playerIndex = 2; // temporarily hard coded
