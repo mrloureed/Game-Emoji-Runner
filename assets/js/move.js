@@ -2,7 +2,7 @@ fc.move = (function() {
 
     fc.playerX = 0;
     fc.playerY = 0;
-    fc.levelSpeed = 300;
+    fc.levelSpeed = 260;
     fc.playerMoving = 1;
     var directionHeading = 'right';
 

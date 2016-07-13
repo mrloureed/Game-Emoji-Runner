@@ -104,8 +104,8 @@ fc.collisions = (function() {
                     fc.foodChain[index].onBoard = false;
                 } else {
                     //tie
-                    $('#sprite-' + index).attr('id', 'heart-' + index).appendTo(fc.$stage);
-                    $('#heart-' + index).addClass('heart').html('&#x1F49A;');
+                    $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
+                    setTimeout(checkAlive, 10);
                 }
             }
     	});
