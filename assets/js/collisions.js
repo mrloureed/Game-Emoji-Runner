@@ -38,7 +38,18 @@ fc.collisions = (function() {
         if (stillAlive === false) {
             console.log('game over');
             fc.playerMoving = 0;
+            swarm();
+        } else {
+            fc.playerMoving = 1;
         }
+    }
+
+    function swarm() {
+        $.each(fc.foodChain, function(index, object) {
+            if (fc.foodChain[index].onBoard === true) {
+                $('[data-animal='+index+']').css('left', fc.playerX).css('top', fc.playerY);
+            }
+        });
     }
 
     function checkLevel() {
@@ -84,6 +95,7 @@ fc.collisions = (function() {
             if (this.coords[0] !== 0 && this.coords[0] === fc.playerX && this.coords[1] === fc.playerY && hasGhost === false) {
             	// is collision a win ?
                 if (fc.playerIndex > index) {
+                    fc.foodChain[index].onBoard = false;
                     //evolve
                     fc.playerIndex++;
         			updatePlayer();
@@ -105,10 +117,10 @@ fc.collisions = (function() {
                     fc.playerIndex--;
                     updatePlayer();
                     // move to starting position
-                    setTimeout(resetPlayer, 10);
+                    // setTimeout(resetPlayer, 10);
                     setTimeout(checkAlive, 10);
-                    fc.foodChain[index].onBoard = false;
                 } else {
+                    fc.foodChain[index].onBoard = false;
                     //tie
                     fc.score += 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
