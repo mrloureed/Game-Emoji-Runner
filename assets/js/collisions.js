@@ -87,7 +87,7 @@ fc.collisions = (function() {
                     //evolve
                     fc.playerIndex++;
         			updatePlayer();
-                    fc.score += 100;
+                    fc.score += 100*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     // create skull
                     var $obj = $('#sprite-' + index);
@@ -95,6 +95,8 @@ fc.collisions = (function() {
                     createGhost($obj, index);
                     checkLevel();
                 } else if (fc.playerIndex < index) {
+                    fc.score -= 200*fc.level;
+                    fc.scoreboard.update(fc.$score, fc.score);
                     fc.playerMoving = 0;
                     // create ghost
                     var $obj = fc.$player.clone().appendTo(fc.$stage);
@@ -108,7 +110,8 @@ fc.collisions = (function() {
                     fc.foodChain[index].onBoard = false;
                 } else {
                     //tie
-                    fc.scoreboard.update(fc.$score, 200*fc.level);
+                    fc.score += 200*fc.level;
+                    fc.scoreboard.update(fc.$score, fc.score);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
                     setTimeout(checkAlive, 10);
                 }
