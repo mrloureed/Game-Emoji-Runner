@@ -12,7 +12,7 @@ fc.setStage = (function() {
     fc.stageHeight = 0;
     var gridWidth = 0;
     var gridHeight = 0;
-    var level = 1;
+    fc.level = 1;
     fc.animalsToStart = 5; // number of animals to start
     fc.playerIndex;
 
@@ -24,7 +24,7 @@ fc.setStage = (function() {
             $(this).hide(); // hide link
             fc.$headingTitle.hide(); // hide text
             fc.$tree.addClass('grow'); // show trees
-            fc.addEmojis.addPlayer(2,4);
+            fc.addEmojis.addPlayer();
             fc.addEmojis.addAnimals();
             fc.playerMoving = 1;
             fc.directionRequested = 'right';

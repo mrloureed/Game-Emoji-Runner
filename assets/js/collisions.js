@@ -51,17 +51,19 @@ fc.collisions = (function() {
         if (nextLevel === true) {
             console.log('next level');
             fc.playerMoving = 0;
-            fc.levelSpeed -= 20;
+            fc.levelSpeed -= 10;
             $('.sprite').css('-webkit-transition-duration', '.'+fc.levelSpeed/100+'s');
             levelUp();
             fc.animalsToStart++;
-            fc.playerIndex = 2; // temporarily hard coded
+            fc.playerIndex = Math.floor(fc.addEmojis.getRandomIndex(2, fc.level+2));
             updatePlayer();
             fc.addEmojis.addAnimals();
         }
     }
 
     function levelUp() {
+        fc.level++;
+        fc.scoreboard.update(fc.$level, fc.level);
         fc.defineSprites(); // reset data
         fc.$stage.find('.animal').remove(); // remove animals
         fc.move.setVars(); // reset move vars
@@ -85,6 +87,8 @@ fc.collisions = (function() {
                     //evolve
                     fc.playerIndex++;
         			updatePlayer();
+                    fc.score += 100;
+                    fc.scoreboard.update(fc.$score, fc.score);
                     // create skull
                     var $obj = $('#sprite-' + index);
                     createSkull($obj, index);
@@ -104,6 +108,7 @@ fc.collisions = (function() {
                     fc.foodChain[index].onBoard = false;
                 } else {
                     //tie
+                    fc.scoreboard.update(fc.$score, 200*fc.level);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
                     setTimeout(checkAlive, 10);
                 }
