@@ -1,5 +1,5 @@
 fc.collisions = (function() {
-	function createGhost($o, i) {
+	function createGhost($o) {
         // ascend ghost
         var sCoords = $o.offset();
         var sx = sCoords.top - 100;
@@ -39,6 +39,12 @@ fc.collisions = (function() {
             console.log('game over');
             fc.playerMoving = 0;
             swarm();
+            setTimeout(function() {
+                createGhost(fc.$player);
+            }, fc.levelSpeed);
+            setTimeout(function() {
+                $('[data-animal').hide();
+            }, fc.levelSpeed*4);
         } else {
             fc.playerMoving = 1;
         }
@@ -104,7 +110,7 @@ fc.collisions = (function() {
                     // create skull
                     var $obj = $('#sprite-' + index);
                     createSkull($obj, index);
-                    createGhost($obj, index);
+                    createGhost($obj);
                     checkLevel();
                 } else if (fc.playerIndex < index) {
                     fc.score -= 200*fc.level;
@@ -112,7 +118,7 @@ fc.collisions = (function() {
                     fc.playerMoving = 0;
                     // create ghost
                     var $obj = fc.$player.clone().appendTo(fc.$stage);
-                    createGhost($obj, index);
+                    createGhost($obj);
                     // devolve
                     fc.playerIndex--;
                     updatePlayer();
