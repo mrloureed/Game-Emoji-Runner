@@ -44,6 +44,8 @@ fc.collisions = (function() {
             }, fc.levelSpeed);
             setTimeout(function() {
                 $('[data-animal').hide();
+                $('[data-text-alert]').css('opacity',1);
+                fc.$tree.removeClass('grow'); // hide trees
             }, fc.levelSpeed*4);
         } else {
             fc.playerMoving = 1;
