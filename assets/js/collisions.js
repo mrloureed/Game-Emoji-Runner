@@ -74,6 +74,11 @@ fc.collisions = (function() {
             $('.sprite').css('-webkit-transition-duration', '.'+fc.levelSpeed/100+'s');
             levelUp();
             fc.animalsToStart++;
+            if (fc.level+2 > fc.foodChain.length/2) {
+                var high = fc.foodChain.length/2;
+            } else {
+                var high = fc.level+2
+            }
             fc.playerIndex = Math.floor(fc.addEmojis.getRandomIndex(2, fc.level+2));
             updatePlayer();
             fc.addEmojis.addAnimals();
