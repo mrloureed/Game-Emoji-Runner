@@ -75,7 +75,6 @@ fc.collisions = (function() {
         var nextLevel = true;
         $.each(fc.foodChain, function(index, object) {
             if (fc.foodChain[index].onBoard === true && index > fc.playerIndex) {
-                console.log(index,fc.playerIndex);
                 nextLevel = false;
             }
         });
