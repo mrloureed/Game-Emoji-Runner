@@ -21,7 +21,7 @@ fc.setStage = (function() {
         // start game
         fc.$startLink.click(function() {
             fc.score = 0;
-            fc.level = 0;
+            fc.level = 1;
             fc.scoreboard.update(fc.$score, fc.score);
             fc.defineSprites(); // reset data
             $(this).hide(); // hide link
