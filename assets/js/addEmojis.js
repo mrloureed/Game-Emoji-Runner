@@ -60,7 +60,7 @@ fc.addEmojis = (function() {
             });
 
             // we didn't find a match so proceed generating animal as long as coordinates are not over trees
-            if(foundMatch != true && rCoords[0] % (fc.playerWidth * 2) === 0 && rCoords[1] % (fc.playerWidth * 2) === 0) {
+            if(rCoords[1] != 400 && foundMatch != true && rCoords[0] % (fc.playerWidth * 2) === 0 && rCoords[1] % (fc.playerWidth * 2) === 0) {
                 fc.foodChain[i].coords[0] = rCoords[0];
                 fc.foodChain[i].coords[1] = rCoords[1];
                 var animalHtml = '<div data-animal="'+i+'" id="sprite-' + i + '" class="sprite animal">' + fc.foodChain[i].code + '</div>';
