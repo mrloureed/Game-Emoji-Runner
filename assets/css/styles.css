@@ -224,7 +224,7 @@ h2 {
     color: #edee79;
 }
 
-.gameover {
+.messaging {
     top: 166px;
     opacity: 0;
     line-height: 1.2em;
@@ -236,8 +236,8 @@ h2 {
     color: #edee79;
 }
 
-.gameover,
-.gameover span {
+.messaging,
+.messaging span {
     color: #fff;
 }
 

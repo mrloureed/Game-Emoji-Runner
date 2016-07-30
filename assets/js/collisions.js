@@ -36,7 +36,6 @@ fc.collisions = (function() {
             }
         });
         if (stillAlive === false) {
-            console.log('game over');
             fc.playerMoving = 0;
             swarm();
             setTimeout(function() {
@@ -44,11 +43,11 @@ fc.collisions = (function() {
             }, fc.levelSpeed);
             setTimeout(function() {
                 $('[data-animal').hide();
-                $('[data-text-alert]').css('opacity',1);
+                $('[data-text-alert]').css('opacity',1).html('<span class="emoji">&#x1F480;</span>GAME OVER');
                 fc.$tree.removeClass('grow'); // hide trees
             }, fc.levelSpeed*4);
             setTimeout(function() {
-                $('.gameover').css('opacity',0);
+                $('.messaging').css('opacity',0);
                 fc.addEmojis.resetGame();
             }, 4000);
         } else {
