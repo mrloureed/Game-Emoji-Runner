@@ -58,9 +58,10 @@ body {
 
 h2 {
     position: absolute;
-    top: 0;
+    top: -7px;
     left: 0;
     margin: 0;
+    line-height: 22px;
 }
 
 h2.bottom {
@@ -78,13 +79,24 @@ h2.bottom {
 }
 
 .score h2 {
+    font-size: 24px;
     padding: 10px;
     text-shadow: 2px 2px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1);
+}
+
+.score .heading {
+    font-size: 18px;
 }
 
 .score h2:last-child {
     left: auto;
     right: 0;
+    text-align: right;
+}
+
+.highscore {
+    left: 265px;
+    text-align: center;
 }
 
 .sprite {
