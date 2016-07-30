@@ -72,7 +72,8 @@ fc.collisions = (function() {
     function checkLevel() {
         var nextLevel = true;
         $.each(fc.foodChain, function(index, object) {
-            if (fc.foodChain[index].onBoard === true && index >= fc.playerIndex) {
+            if (fc.foodChain[index].onBoard === true && index > fc.playerIndex) {
+                console.log(index,fc.playerIndex);
                 nextLevel = false;
             }
         });
@@ -105,6 +106,9 @@ fc.collisions = (function() {
 
     function checkCollisions() {
     	$.each(fc.foodChain, function(index, object) {
+
+            var hasGhost = false;
+
             // Check ghost status
             if ($('#sprite-' + index).hasClass('ghost') || $('#sprite-' + index).hasClass('heart')) {
                 hasGhost = true;
@@ -115,7 +119,9 @@ fc.collisions = (function() {
             // check for collision between player and emojis
             // if first coordinate is 0 emoji is out of play
             if (this.coords[0] !== 0 && this.coords[0] === fc.playerX && this.coords[1] === fc.playerY && hasGhost === false) {
-            	// is collision a win ?
+            	
+
+                // is collision a win ?
                 if (fc.playerIndex > index) {
                     fc.foodChain[index].onBoard = false;
                     //evolve
