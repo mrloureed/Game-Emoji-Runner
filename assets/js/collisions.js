@@ -63,6 +63,13 @@ fc.collisions = (function() {
         });
     }
 
+    function displayMessage(message) {
+        $('[data-text-alert]').css('opacity',1).html(message);
+        setTimeout(function() {
+             $('[data-text-alert]').css('opacity',0);
+        }, 2000);
+    }
+
     function checkLevel() {
         var nextLevel = true;
         $.each(fc.foodChain, function(index, object) {
@@ -71,7 +78,7 @@ fc.collisions = (function() {
             }
         });
         if (nextLevel === true) {
-            console.log('next level');
+            displayMessage('<span class="emoji">&nbsp;</span>LEVEL '+(fc.level+1));
             fc.playerMoving = 0;
             fc.levelSpeed -= 10;
             $('.sprite').css('-webkit-transition-duration', '.'+fc.levelSpeed/100+'s');

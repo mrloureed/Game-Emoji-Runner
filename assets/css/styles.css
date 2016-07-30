@@ -225,7 +225,7 @@ h2 {
 }
 
 .messaging {
-    top: 166px;
+    top: 266px;
     opacity: 0;
     line-height: 1.2em;
 }
@@ -238,7 +238,7 @@ h2 {
 
 .messaging,
 .messaging span {
-    color: #fff;
+    color: #edee79;
 }
 
 .start {
