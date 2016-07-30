@@ -63,6 +63,13 @@ h2 {
     margin: 0;
 }
 
+h2.bottom {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
 .score {
     z-index: 10;
     position: absolute;

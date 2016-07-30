@@ -45,6 +45,7 @@ fc.collisions = (function() {
                 $('[data-animal').hide();
                 $('[data-text-alert]').css('opacity',1).html('<span class="emoji">&#x1F480;</span>GAME OVER');
                 fc.$tree.removeClass('grow'); // hide trees
+                fc.animalsToStart = 5;
             }, fc.levelSpeed*4);
             setTimeout(function() {
                 $('.messaging').css('opacity',0);
