@@ -145,6 +145,7 @@ fc.collisions = (function() {
                 } else {
                     fc.foodChain[index].onBoard = false;
                     //tie
+                    displayMessage('<span class="emoji" style="color: #eb7777;">&#x1F49A;</span>BONUS!');
                     fc.score += 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
