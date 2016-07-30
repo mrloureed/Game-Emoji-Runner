@@ -18,6 +18,7 @@ fc.collisions = (function() {
     }
 
     function resetPlayer() {
+        fc.$player.addClass('no-transition');
         fc.playerX = -100;
         fc.playerY = 0;
         fc.$player.css('top',0).css('left',-100);
@@ -77,6 +78,10 @@ fc.collisions = (function() {
                 nextLevel = false;
             }
         });
+        console.log(fc.playerIndex);
+        if (fc.playerIndex === 20) {
+            nextLevel = true;
+        }
         if (nextLevel === true) {
             displayMessage('<span class="emoji">&nbsp;</span>LEVEL '+(fc.level+1));
             fc.playerMoving = 0;
@@ -119,8 +124,6 @@ fc.collisions = (function() {
             // check for collision between player and emojis
             // if first coordinate is 0 emoji is out of play
             if (this.coords[0] !== 0 && this.coords[0] === fc.playerX && this.coords[1] === fc.playerY && hasGhost === false) {
-            	
-
                 // is collision a win ?
                 if (fc.playerIndex > index) {
                     fc.foodChain[index].onBoard = false;
@@ -135,6 +138,7 @@ fc.collisions = (function() {
                     createGhost($obj);
                     checkLevel();
                 } else if (fc.playerIndex < index) {
+                    displayMessage('<span class="emoji">'+fc.foodChain[fc.playerIndex].code+'</span>OUCH!');
                     fc.score -= 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     fc.playerMoving = 0;
