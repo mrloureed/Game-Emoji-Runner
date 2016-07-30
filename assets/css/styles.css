@@ -216,18 +216,29 @@ h2 {
 }
 
 .title {
-    top: 132px;
     opacity: 1;
+    top: 132px;
     z-index: 2000000000;
     line-height: 1em;
     font-size: 50px;
     color: #edee79;
 }
 
+.gameover {
+    top: 166px;
+    opacity: 0;
+    line-height: 1.2em;
+}
+
 .title span {
     margin-bottom: 70px;
     font-size: 200px;
     color: #edee79;
+}
+
+.gameover,
+.gameover span {
+    color: #fff;
 }
 
 .start {
@@ -240,17 +251,6 @@ h2 {
     text-decoration: none;
     color: #fff;
     font-size: 50px;
-}
-
-.gameover {
-    margin: -85px 0 0;
-    font-size: 40px;
-}
-
-.overlay .audio.gameover {
-    line-height: 1.2em;
-    color: #fff;
-    font-size: 40px;
 }
 
 .sprite.ghost {

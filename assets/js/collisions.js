@@ -47,6 +47,10 @@ fc.collisions = (function() {
                 $('[data-text-alert]').css('opacity',1);
                 fc.$tree.removeClass('grow'); // hide trees
             }, fc.levelSpeed*4);
+            setTimeout(function() {
+                $('.gameover').css('opacity',0);
+                fc.addEmojis.resetGame();
+            }, 4000);
         } else {
             fc.playerMoving = 1;
         }

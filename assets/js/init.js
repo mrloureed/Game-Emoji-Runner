@@ -20,6 +20,8 @@ fc.setStage = (function() {
     function setHandlers() {
         // start game
         fc.$startLink.click(function() {
+            fc.score = 0;
+            fc.scoreboard.update(fc.$score, fc.score);
             fc.defineSprites(); // reset data
             $(this).hide(); // hide link
             fc.$headingTitle.hide(); // hide text
