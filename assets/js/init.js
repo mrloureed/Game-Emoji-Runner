@@ -23,6 +23,7 @@ fc.setStage = (function() {
             fc.score = 0;
             fc.level = 1;
             fc.scoreboard.update(fc.$score, fc.score);
+            fc.scoreboard.update(fc.$level, fc.level);
             fc.defineSprites(); // reset data
             $(this).hide(); // hide link
             fc.$headingTitle.hide(); // hide text
