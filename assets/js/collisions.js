@@ -30,7 +30,6 @@ fc.collisions = (function() {
         $.each(fc.foodChain, function(index, object) {
             if(!$('#sprite-' + index).hasClass('ghost') && !$('#sprite-' + index).hasClass('heart')) {
                 if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
-                    console.log('still alive',fc.playerIndex,index);
                     stillAlive = true;
                 }
             }
@@ -145,7 +144,7 @@ fc.collisions = (function() {
                 } else {
                     fc.foodChain[index].onBoard = false;
                     //tie
-                    displayMessage('<span class="emoji" style="color: #eb7777;">&#x1F49A;</span>BONUS!');
+                    displayMessage('<span class="emoji">&#x1F49A;</span>BONUS!');
                     fc.score += 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
