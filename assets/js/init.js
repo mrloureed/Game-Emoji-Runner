@@ -60,7 +60,6 @@ fc.setStage = (function() {
         fc.addEmojis.calcDims(); // get sizes of elements
         fc.addEmojis.genTrees(); // create HTML for trees
         fc.$tree = $('[data-tree]'); // get all the trees
-        fc.cookie.check(); // update high score from cookie
     }
 
     init();
