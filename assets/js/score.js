@@ -1,4 +1,5 @@
 fc.scoreboard = (function() {
+    
 	fc.score = 0;
     fc.highscore = 0;
 
@@ -8,6 +9,7 @@ fc.scoreboard = (function() {
             fc.highscore = fc.score;
             fc.scoreboard.update(fc.$highscore, fc.highscore);
         }
+        fc.cookie.check(); // update high score from cookie
 	}
 
 	function init() {
