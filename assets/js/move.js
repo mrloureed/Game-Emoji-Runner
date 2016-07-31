@@ -22,6 +22,7 @@ fc.move = (function() {
     fc.playerFlip = direction.right[3];
 
     function startShow() {
+        fc.cookie.check(); // update high score from cookie
         if (fc.playerMoving !== 0 && fc.$player !== undefined) {
             fc.playerMoving = setTimeout(playerMove, fc.levelSpeed); 
             checkTurn(fc.directionRequested);
