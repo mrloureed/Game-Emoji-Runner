@@ -29,6 +29,7 @@ fc.cookie = (function() {
 	    } else {
 	    	setCookie("fc-highscore", fc.highscore, 30);
 	    }
+	    fc.scoreboard.update(fc.$highscore, fc.highscore);
 	}
 
 	return {
