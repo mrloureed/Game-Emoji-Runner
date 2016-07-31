@@ -33,6 +33,8 @@ fc.cookie = (function() {
 	}
 
 	return {
+		set: setCookie,
+		get: getCookie,
 		check: checkCookie
 	}
 
