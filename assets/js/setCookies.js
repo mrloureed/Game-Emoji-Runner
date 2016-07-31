@@ -35,4 +35,4 @@ fc.cookie = (function() {
 		check: checkCookie
 	}
 
-});
+})();
