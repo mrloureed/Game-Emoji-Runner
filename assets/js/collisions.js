@@ -95,7 +95,12 @@ fc.collisions = (function() {
             } else {
                 var high = fc.level+2
             }
-            fc.playerIndex = Math.floor(fc.addEmojis.getRandomIndex(2, fc.level+2));
+            if (fc.level < 6) {
+                fc.playerIndex = Math.floor(fc.addEmojis.getRandomIndex(2, fc.level+1));
+            } else {
+                // don't make it any easier going forward
+                fc.playerIndex = Math.floor(fc.addEmojis.getRandomIndex(2, 6));
+            }
             updatePlayer();
             fc.addEmojis.addAnimals();
         }
