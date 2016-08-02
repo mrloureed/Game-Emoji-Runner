@@ -29,10 +29,13 @@ fc.collisions = (function() {
     function checkAlive() {
         var stillAlive = false;
         $.each(fc.foodChain, function(index, object) {
-            if(!$('#sprite-' + index).hasClass('ghost') && !$('#sprite-' + index).hasClass('heart')) {
-                if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
-                    stillAlive = true;
-                }
+            if (fc.foodChain[index].onBoard === false) {
+                stillAlive = true;
+            } 
+        });
+        $.each(fc.foodChain, function(index, object) {
+            if (fc.foodChain[index].onBoard === true && fc.playerIndex >= index) {
+                stillAlive = true;
             }
         });
         if (stillAlive === false) {
@@ -75,11 +78,10 @@ fc.collisions = (function() {
     function checkLevel() {
         var nextLevel = true;
         $.each(fc.foodChain, function(index, object) {
-            if (fc.foodChain[index].onBoard === true && index > fc.playerIndex) {
+            if (fc.foodChain[index].onBoard === true) {
                 nextLevel = false;
             }
         });
-        console.log(fc.playerIndex);
         if (fc.playerIndex === 20) {
             nextLevel = true;
         }
@@ -159,7 +161,7 @@ fc.collisions = (function() {
                     fc.score += 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
-                    setTimeout(checkAlive, 10);
+                    checkLevel();
                 }
             }
     	});
