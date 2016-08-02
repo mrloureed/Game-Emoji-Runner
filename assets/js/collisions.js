@@ -1,5 +1,5 @@
 fc.collisions = (function() {
-	function createGhost($o) {
+    function createGhost($o) {
         // ascend ghost
         var sCoords = $o.offset();
         var sx = sCoords.top - 100;
@@ -29,13 +29,10 @@ fc.collisions = (function() {
     function checkAlive() {
         var stillAlive = false;
         $.each(fc.foodChain, function(index, object) {
-            if (fc.foodChain[index].onBoard === false) {
-                stillAlive = true;
-            } 
-        });
-        $.each(fc.foodChain, function(index, object) {
-            if (fc.foodChain[index].onBoard === true && fc.playerIndex >= index) {
-                stillAlive = true;
+            if(!$('#sprite-' + index).hasClass('ghost') && !$('#sprite-' + index).hasClass('heart')) {
+                if (fc.foodChain[index].onBoard === true && fc.playerIndex > index) {
+                    stillAlive = true;
+                }
             }
         });
         if (stillAlive === false) {
@@ -82,6 +79,7 @@ fc.collisions = (function() {
                 nextLevel = false;
             }
         });
+        console.log(fc.playerIndex);
         if (fc.playerIndex === 20) {
             nextLevel = true;
         }
@@ -113,7 +111,7 @@ fc.collisions = (function() {
     }
 
     function checkCollisions() {
-    	$.each(fc.foodChain, function(index, object) {
+        $.each(fc.foodChain, function(index, object) {
 
             var hasGhost = false;
 
@@ -132,7 +130,7 @@ fc.collisions = (function() {
                     fc.foodChain[index].onBoard = false;
                     //evolve
                     fc.playerIndex++;
-        			updatePlayer();
+                    updatePlayer();
                     fc.score += 100*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     // create skull
@@ -161,10 +159,10 @@ fc.collisions = (function() {
                     fc.score += 200*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     $('#sprite-' + index).addClass('heart').html('&#x1F49A;');
-                    checkLevel();
+                    checkLevel();  
                 }
             }
-    	});
+        });
     }
 
     return {
