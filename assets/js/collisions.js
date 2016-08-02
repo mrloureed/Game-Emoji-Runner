@@ -145,8 +145,6 @@ fc.collisions = (function() {
                     checkLevel();
                 } else if (fc.playerIndex < index) {
                     displayMessage('<span class="emoji">'+fc.foodChain[fc.playerIndex].code+'</span>OUCH!');
-                    fc.score -= 200*fc.level;
-                    fc.scoreboard.update(fc.$score, fc.score);
                     fc.playerMoving = 0;
                     // create ghost
                     var $obj = fc.$player.clone().appendTo(fc.$stage);
