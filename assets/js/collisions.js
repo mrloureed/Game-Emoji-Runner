@@ -47,7 +47,7 @@ fc.collisions = (function() {
                 fc.$tree.removeClass('grow'); // hide trees
                 fc.animalsToStart = 5;
                 fc.cookie.check(); // update high score from cookie
-            }, fc.levelSpeed*4);
+            }, 2000);
             setTimeout(function() {
                 $('.messaging').css('opacity',0);
                 fc.addEmojis.resetGame();
