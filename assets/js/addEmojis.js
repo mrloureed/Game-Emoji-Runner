@@ -84,6 +84,7 @@ fc.addEmojis = (function() {
         $('.sprite').css('-webkit-transition-duration', '.24s');
         fc.defineSprites(); // reset data
         fc.$startLink.show(); // show link
+        fc.$aboutLink.show(); // show link
         fc.$headingTitle.show(); // show text
         fc.$tree.removeClass('grow'); // hide trees
         fc.$player.remove(); // remove player
