@@ -1,6 +1,8 @@
 // Set the 'stage'
 fc.setStage = (function() {
     fc.$startLink = $('[data-link-start]'); // start link
+    fc.$aboutLink = $('[data-link-about]'); // about link
+    fc.$closeLink = $('[data-link-close]'); // close link    
     fc.$headingTitle = $('[data-link-title]'); // game title
     fc.$stage = $('[data-stage]'); // get stage div
     fc.$tree = $('[data-tree]'); // get the first tree
@@ -33,6 +35,22 @@ fc.setStage = (function() {
             fc.playerMoving = 1;
             fc.directionRequested = 'right';
             fc.move.play();
+            fc.$aboutLink.hide();
+        });
+
+        // about game
+        fc.$aboutLink.click(function() {
+            fc.$headingTitle.hide(); // hide text
+            fc.$startLink.hide();
+            fc.$aboutLink.hide();
+            $('[data-about]').show();
+        });
+
+        fc.$closeLink.click(function() {
+            fc.$headingTitle.show(); // hide text
+            fc.$startLink.show();
+            fc.$aboutLink.show();
+            $('[data-about]').hide();
         });
 
         // escape key to reset game

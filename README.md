@@ -1,6 +1,6 @@
 # Game-Emoji-Runner
 
-Emoji Runner is a game where you fight to move up the food chain by 'eating' 'animals' that are lower on the food chain. A key to the animal kingdom is not presented so use your best judgement and learn as you play! 
+Emoji Runner is a game where you fight to move up the food chain by 'eating' animals that are lower on the food chain. A key to the animal kingdom is not presented so use your best judgement and learn as you play! 
 
 You will evolve if you eat an animal lower on the food chain, and devolve if you run into an animal higher on the food chain.
 

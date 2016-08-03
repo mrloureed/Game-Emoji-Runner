@@ -12,6 +12,10 @@
     font-style: normal;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
     margin: 0;
@@ -267,9 +271,21 @@ h2.bottom {
 }
 
 .start a {
+    font-style: italic;
     text-decoration: none;
     color: #fff;
     font-size: 50px;
+}
+
+.start-about {
+    top: 506px;
+    bottom: 55px;
+}
+
+.start-about a {
+    font-style: normal;
+    font-size: 48px;
+    color: #edee79;
 }
 
 .sprite.ghost {
@@ -301,4 +317,27 @@ h2.bottom {
 
 .tree.grow span {
     top: 0;
+}
+
+.about {
+    z-index: 1000000;
+    display: none;
+    position: absolute;
+    top: 0;
+    padding: 60px;
+    color: #fff;
+    text-shadow: 2px 2px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1);
+    font-size: 22px;
+    background: rbga(0 0 0 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    line-height: 1.7em;
+    height: 850px;
+}
+
+.about a {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    color: #fff;
+    text-decoration: none;
 }
