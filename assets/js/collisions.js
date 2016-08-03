@@ -79,10 +79,6 @@ fc.collisions = (function() {
                 nextLevel = false;
             }
         });
-        console.log(fc.playerIndex);
-        if (fc.playerIndex === 20) {
-            nextLevel = true;
-        }
         if (nextLevel === true) {
             displayMessage('<span class="emoji">&nbsp;</span>LEVEL '+(fc.level+1));
             fc.playerMoving = 0;
@@ -133,9 +129,11 @@ fc.collisions = (function() {
                 // is collision a win ?
                 if (fc.playerIndex > index) {
                     fc.foodChain[index].onBoard = false;
-                    //evolve
-                    fc.playerIndex++;
-                    updatePlayer();
+                    // evolve if player is not at max
+                    if (fc.playerIndex < 19) {
+                        fc.playerIndex++;
+                        updatePlayer();
+                    }
                     fc.score += 100*fc.level;
                     fc.scoreboard.update(fc.$score, fc.score);
                     // create skull
